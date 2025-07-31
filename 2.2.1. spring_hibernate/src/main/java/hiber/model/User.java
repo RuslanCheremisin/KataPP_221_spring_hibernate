@@ -71,7 +71,7 @@ public class User {
          this.car.setUser(null);
       }
       this.car = car;
-      if (car != null) {
+      if (car != null && car.getUser() != this) {
          car.setUser(this);
       }
    }
