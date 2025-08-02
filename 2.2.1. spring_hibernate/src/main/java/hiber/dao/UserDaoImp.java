@@ -22,7 +22,13 @@ public class UserDaoImp implements UserDao {
    @Override
    @SuppressWarnings("unchecked")
    public List<User> listUsers() {
-      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("SELECT u FROM User u JOIN u.car c", User.class);
+      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("SELECT u FROM FETCH User u JOIN u.car c", User.class);
+      return query.getResultList();
+   }
+
+   @Override
+   public List<User> getUsersByCarModelAndSeries(String model, String series) {
+      TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("SELECT u FROM User u JOIN FETCH u.car c WHERE c.model = '" + model + "' AND " + "c.series = '" + series + "'", User.class);
       return query.getResultList();
    }
 
